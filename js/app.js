@@ -1,14 +1,45 @@
-/*
- * Create a list that holds all of your cards
- */
-
-
+const BOARD = document.querySelector(".deck");
+//Create a list that holds all of your cards
+const CARDS = [
+  "diamond",
+  "paper-plane-o",
+  "anchor",
+  "bolt",
+  "cube",
+  "anchor",
+  "leaf",
+  "bicycle",
+  "diamond",
+  "bomb",
+  "leaf",
+  "bomb",
+  "bolt",
+  "bicycle",
+  "paper-plane-o",
+  "cube"
+]
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+let HTMLCards;
+ function initBoard() {
+ 	BOARD.innerHTML = "";
+ 	shuffle(CARDS);
+ 	HTMLCards = [];
+ 	CARDS.forEach(function(card){
+ 		HTMLCards.push(`
+ 			<li class="card">
+                <i class="fa fa-${card}"></i>
+            </li>
+ 			`)
+ 	});
+ 	for (var i = 0; i < HTMLCards.length; i++) {
+ 		BOARD.innerHTML += HTMLCards[i];
+ 	}
+ }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -25,6 +56,7 @@ function shuffle(array) {
     return array;
 }
 
+initBoard();
 
 /*
  * set up the event listener for a card. If a card is clicked:
