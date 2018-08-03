@@ -39,7 +39,22 @@ let HTMLCards;
  	for (var i = 0; i < HTMLCards.length; i++) {
  		BOARD.innerHTML += HTMLCards[i];
  	}
+ 	BOARD.addEventListener("click", function(event) {
+ 		if (event.target.nodeName == "LI") {
+ 			flipCard(event.target);
+ 		}
+ 	});
  }
+
+function flipCard(card) {
+	if (card.classList.value == "card"){ 
+	card.classList.add("open", "show");
+	}
+	else if (card.classList.value == "card open show") {
+		card.classList.remove("open", "show");
+	}
+
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
