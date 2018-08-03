@@ -47,13 +47,12 @@ let HTMLCards;
  }
 
 function flipCard(card) {
-	if (card.classList.value == "card"){ 
+	if (!card.classList.contains("show")){ 
 	card.classList.add("open", "show");
 	}
-	else if (card.classList.value == "card open show") {
+	else if (card.classList.contains("open", "show")) {
 		card.classList.remove("open", "show");
 	}
-
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
