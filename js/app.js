@@ -43,7 +43,7 @@ function initBoard() {
  	});
  	BOARD.addEventListener("click", function(event) {
  		if (event.target.nodeName == "LI") {
- 			debugger;
+ 			//debugger;
  			flipCard(event.target);
  			//trackOpenCards(event.target);
  			if (openCards.length === 2) {
@@ -77,10 +77,12 @@ function checkMatch(card1, card2) {
 		openCards = [];
 	}
 	else {
+		setTimeout(function() {
 		openCards.forEach(function(card) {
 			card.classList.remove("open", "show");
 		})
 		openCards = [];
+	}, 1200)
 	}
 }
 
