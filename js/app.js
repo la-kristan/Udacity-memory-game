@@ -24,8 +24,10 @@ const CARDS = [
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-let HTMLCards;
- function initBoard() {
+let HTMLCards, openCards;
+
+function initBoard() {
+	openCards = [];
  	BOARD.innerHTML = "";
  	shuffle(CARDS);
  	HTMLCards = [];
@@ -36,12 +38,17 @@ let HTMLCards;
             </li>
  			`)
  	});
- 	for (var i = 0; i < HTMLCards.length; i++) {
- 		BOARD.innerHTML += HTMLCards[i];
- 	}
+ 	HTMLCards.forEach(function(card) {
+ 		BOARD.innerHTML += card;
+ 	});
  	BOARD.addEventListener("click", function(event) {
  		if (event.target.nodeName == "LI") {
+ 			debugger;
  			flipCard(event.target);
+ 			//trackOpenCards(event.target);
+ 			if (openCards.length === 2) {
+ 			checkMatch(openCards[0], openCards[1]);
+ 		    }
  		}
  	});
  }
@@ -49,9 +56,31 @@ let HTMLCards;
 function flipCard(card) {
 	if (!card.classList.contains("show")){ 
 	card.classList.add("open", "show");
+	trackOpenCards(card);
 	}
 	else if (card.classList.contains("open", "show")) {
 		card.classList.remove("open", "show");
+	}
+}
+
+function trackOpenCards(card) {
+	if (card !== openCards[0] && openCards.length < 2) 
+		{openCards.push(card);}
+}
+
+function checkMatch(card1, card2) {
+	if (card1.innerHTML === card2.innerHTML) {
+		openCards.forEach(function(card) {
+			card.classList.remove("open");
+			card.classList.add("match")
+		})
+		openCards = [];
+	}
+	else {
+		openCards.forEach(function(card) {
+			card.classList.remove("open", "show");
+		})
+		openCards = [];
 	}
 }
 
@@ -82,3 +111,5 @@ initBoard();
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+
