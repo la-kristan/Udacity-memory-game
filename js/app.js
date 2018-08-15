@@ -24,10 +24,11 @@ const CARDS = [
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-let HTMLCards, openCards;
+let HTMLCards, openCards, moveCount;
 
 function initBoard() {
 	openCards = [];
+	moveCount = 0;
  	BOARD.innerHTML = "";
  	shuffle(CARDS);
  	HTMLCards = [];
@@ -58,9 +59,9 @@ function flipCard(card) {
 	card.classList.add("open", "show");
 	trackOpenCards(card);
 	}
-	else if (card.classList.contains("open", "show")) {
+	/*else if (card.classList.contains("open", "show")) {
 		card.classList.remove("open", "show");
-	}
+	}*/
 }
 
 function trackOpenCards(card) {
@@ -84,6 +85,7 @@ function checkMatch(card1, card2) {
 		openCards = [];
 	}, 1200)
 	}
+	moveCount++;
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
