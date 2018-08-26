@@ -1,4 +1,5 @@
 const BOARD = document.querySelector(".deck");
+const RESET = document.querySelector(".restart");
 //Create a list that holds all of your cards
 const CARDS = [
   "diamond",
@@ -24,11 +25,16 @@ const CARDS = [
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-let HTMLCards, openCards, moveCount;
+let HTMLCards, openCards, moveCount, matchCount;
+
+RESET.addEventListener("click", function() {
+	initBoard();
+})
 
 function initBoard() {
 	openCards = [];
 	moveCount = 0;
+	matchCount = 0;
  	BOARD.innerHTML = "";
  	shuffle(CARDS);
  	HTMLCards = [];
@@ -78,6 +84,7 @@ function checkMatch(card1, card2) {
 			card.classList.remove("open");
 			card.classList.add("match")
 		})
+		matchCount++;
 		openCards = [];
 	}
 	else {
