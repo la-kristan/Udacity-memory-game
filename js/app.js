@@ -44,12 +44,15 @@ function initBoard() {
  	});
  	BOARD.addEventListener("click", function(event) {
  		if (event.target.nodeName == "LI") {
- 			//debugger;
- 			flipCard(event.target);
- 			//trackOpenCards(event.target);
- 			if (openCards.length === 2) {
- 			checkMatch(openCards[0], openCards[1]);
- 		    }
+ 			if (openCards.length < 2) {
+ 				//debugger;
+ 				flipCard(event.target);
+ 				//trackOpenCards(event.target);
+ 				if (openCards.length === 2) {
+ 				checkMatch(openCards[0], openCards[1]);
+ 		    	}
+ 			}
+ 			
  		}
  	});
  }
