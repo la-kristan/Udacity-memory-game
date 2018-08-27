@@ -1,5 +1,8 @@
 const BOARD = document.querySelector(".deck");
 const RESET = document.querySelector(".restart");
+const MODAL = document.querySelector(".modalBackground")
+const TURNS = document.querySelector("#turns");
+const TIME = document.querySelector("#time");
 //Create a list that holds all of your cards
 const CARDS = [
   "diamond",
@@ -86,6 +89,9 @@ function checkMatch(card1, card2) {
 		})
 		matchCount++;
 		openCards = [];
+		if (matchCount === 8) {
+			youWin();
+		}
 	}
 	else {
 		setTimeout(function() {
@@ -111,6 +117,12 @@ function shuffle(array) {
     }
 
     return array;
+}
+
+function youWin() {
+	TURNS.textContent = moveCount;
+	//TIME.textContent = 
+	MODAL.style.display = "block";
 }
 
 initBoard();
