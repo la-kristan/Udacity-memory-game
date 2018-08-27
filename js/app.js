@@ -1,7 +1,7 @@
 const BOARD = document.querySelector(".deck");
 const RESET = document.querySelector(".restart");
 const MODAL = document.querySelector(".modalBackground")
-const TURNS = document.querySelector("#turns");
+const MOVES = document.querySelectorAll(".moves");
 const TIME = document.querySelector("#time");
 //Create a list that holds all of your cards
 const CARDS = [
@@ -102,6 +102,9 @@ function checkMatch(card1, card2) {
 	}, 1200)
 	}
 	moveCount++;
+	for (var i = 0; i < MOVES.length; i++) {
+		MOVES[i].textContent = moveCount;
+	}
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -120,7 +123,7 @@ function shuffle(array) {
 }
 
 function youWin() {
-	TURNS.textContent = moveCount;
+	//TURNS.textContent = moveCount;
 	//TIME.textContent = 
 	MODAL.style.display = "block";
 }
