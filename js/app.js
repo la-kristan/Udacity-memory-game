@@ -1,5 +1,5 @@
 const BOARD = document.querySelector(".deck");
-const RESET = document.querySelector(".restart");
+const RESET = document.querySelectorAll(".restart");
 const MODAL = document.querySelector(".modalBackground")
 const MOVES = document.querySelectorAll(".moves");
 const TIME = document.querySelector("#time");
@@ -30,14 +30,19 @@ const CARDS = [
  */
 let HTMLCards, openCards, moveCount, matchCount;
 
-RESET.addEventListener("click", function() {
+for (var i = 0; i < RESET.length; i++) {
+	RESET[i].addEventListener("click", function() {
 	initBoard();
-})
+	})
+}
 
 function initBoard() {
 	openCards = [];
 	moveCount = 0;
 	matchCount = 0;
+	for (var i = 0; i < MOVES.length; i++) {
+		MOVES[i].textContent = 0;
+	}
  	BOARD.innerHTML = "";
  	shuffle(CARDS);
  	HTMLCards = [];
@@ -127,6 +132,10 @@ function youWin() {
 	//TIME.textContent = 
 	MODAL.style.display = "block";
 }
+
+MODAL.addEventListener("click", function() {
+	MODAL.style.display = "none";
+})
 
 initBoard();
 

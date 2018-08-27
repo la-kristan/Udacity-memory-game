@@ -98,7 +98,7 @@ h1 {
     margin: 0 5px 0 0;
 }
 
-.score-panel .stars li {
+.stars li {
     list-style: none;
     display: inline-block;
 }
@@ -133,5 +133,11 @@ h1 {
 .modal h2 {
     font-size: 2em;
     font-family: "Open Sans", sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+.modal .stars {
+    margin: 5px auto;
     padding: 0;
 }
