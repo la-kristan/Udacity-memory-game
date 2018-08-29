@@ -1,10 +1,11 @@
+//global constants
+
 const BOARD = document.querySelector(".deck");
 const RESET = document.querySelectorAll(".restart");
 const MODAL = document.querySelector(".modalBackground")
 const MOVES = document.querySelectorAll(".moves");
-const TIME = document.querySelector("#time");
+const TIMER = document.querySelectorAll(".time");
 const STARS = document.querySelectorAll(".stars li")
-//Create a list that holds all of your cards
 const CARDS = [
   "diamond",
   "paper-plane-o",
@@ -23,27 +24,21 @@ const CARDS = [
   "paper-plane-o",
   "cube"
 ]
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-let HTMLCards, openCards, moveCount, matchCount;
 
-for (var i = 0; i < RESET.length; i++) {
-	RESET[i].addEventListener("click", function() {
-	initBoard();
-	})
-}
+//global variables
+
+let HTMLCards, openCards, moveCount, matchCount, time, timerRunning, timerID;
+
+//function declarations
 
 function initBoard() {
+	stopTimer();
 	openCards = [];
+	time = 0;
 	moveCount = 0;
 	matchCount = 0;
-	for (var i = 0; i < MOVES.length; i++) {
-		MOVES[i].textContent = 0;
-	}
+	MOVES[0].textContent = 0;
+	TIMER[0].textContent = 0;
 	resetStars();
  	BOARD.innerHTML = "";
  	shuffle(CARDS);
@@ -60,27 +55,28 @@ function initBoard() {
  	});
  	BOARD.addEventListener("click", function(event) {
  		if (event.target.nodeName == "LI") {
+ 			/* There was a weird glitch where after running initBoard without refreshing the page,
+ 			the event function would run twice for each click, causing, in the case of the last click, 
+ 			the startTimer() function to run right after the timer was stopped. Failing to find the source 
+ 			of this glitch, I added the moveCount condition to override it. */
+ 			if (!timerRunning && moveCount < 1) {
+ 				startTimer();
+ 			}
  			if (openCards.length < 2) {
- 				//debugger;
  				flipCard(event.target);
- 				//trackOpenCards(event.target);
  				if (openCards.length === 2) {
  				checkMatch(openCards[0], openCards[1]);
  		    	}
  			}
- 			
  		}
  	});
- }
+}
 
 function flipCard(card) {
 	if (!card.classList.contains("show")){ 
 	card.classList.add("open", "show");
 	trackOpenCards(card);
 	}
-	/*else if (card.classList.contains("open", "show")) {
-		card.classList.remove("open", "show");
-	}*/
 }
 
 function trackOpenCards(card) {
@@ -132,7 +128,23 @@ function resetStars() {
 	}
 }
 
+function startTimer() {
+	timerRunning = true;
+	timerID = setInterval(function() {
+		time++;
+		for (var i = 0; i < TIMER.length; i++) {
+			TIMER[i].textContent = time;
+		}
+	}, 1000)
+}
+
+function stopTimer() {
+	clearInterval(timerID);
+	timerRunning = false;
+}
+
 // Shuffle function from http://stackoverflow.com/a/2450976
+
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -148,9 +160,16 @@ function shuffle(array) {
 }
 
 function youWin() {
-	//TURNS.textContent = moveCount;
-	//TIME.textContent = 
 	MODAL.style.display = "block";
+	stopTimer();
+}
+
+//final setup
+
+for (var i = 0; i < RESET.length; i++) {
+	RESET[i].addEventListener("click", function() {
+	initBoard();
+	})
 }
 
 MODAL.addEventListener("click", function() {
@@ -158,16 +177,3 @@ MODAL.addEventListener("click", function() {
 })
 
 initBoard();
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
-
-
