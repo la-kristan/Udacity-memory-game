@@ -3,6 +3,7 @@ const RESET = document.querySelectorAll(".restart");
 const MODAL = document.querySelector(".modalBackground")
 const MOVES = document.querySelectorAll(".moves");
 const TIME = document.querySelector("#time");
+const STARS = document.querySelectorAll(".stars li")
 //Create a list that holds all of your cards
 const CARDS = [
   "diamond",
@@ -43,6 +44,7 @@ function initBoard() {
 	for (var i = 0; i < MOVES.length; i++) {
 		MOVES[i].textContent = 0;
 	}
+	resetStars();
  	BOARD.innerHTML = "";
  	shuffle(CARDS);
  	HTMLCards = [];
@@ -109,6 +111,24 @@ function checkMatch(card1, card2) {
 	moveCount++;
 	for (var i = 0; i < MOVES.length; i++) {
 		MOVES[i].textContent = moveCount;
+	}
+	decreaseStars();
+}
+
+function decreaseStars() {
+	if (moveCount === 17) {
+		STARS[2].style.display = "none";
+		STARS[5].style.display = "none";
+	}
+	else if (moveCount === 25) {
+		STARS[1].style.display = "none";
+		STARS[4].style.display = "none";
+	}
+}
+
+function resetStars() {
+	for (var i = 0; i < STARS.length; i++) {
+		STARS[i].style.display = "inline-block";
 	}
 }
 
