@@ -1,37 +1,5 @@
-## Welcome to GitHub Pages
+Match the cards to win the game!
 
-You can use the [editor on GitHub](https://github.com/la-kristan/Udacity-memory-game/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+If you complete the game in 16 moves (clicking two cards counts as one move), you get a score of three stars! 24 moves or less gets you a score of two stars, and more than 24 results in a one-star score. Pay attention to the cards, to complete the game in as few moves as you can! Have fun!
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/la-kristan/Udacity-memory-game/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+The design is from the starter files provided by Udacity, though I do want to make a more unique (and responsive!) version in the next few months. The JS code (except for the shuffle function, as noted in the code comments) is my own... not the most elegant or efficient code ever, but hopefully that will be improved in later versions. Special thanks to Matthew Cranford for his guidance on how to make a timer.
